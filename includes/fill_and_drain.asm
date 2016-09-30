@@ -35,21 +35,22 @@ colormode2:		lda #$00
 				stx counter
 				
 				//get the current interrupt line, decide whether we need to count up or down
-				ldx rasterline
-				lda fillmodeflag
+				lda rasterline
+				ldx fillmodeflag
+                cpx #$00
 				bne drain_scr
 				
-fill_scr:		inx						//fill screen counts up
-				stx rasterline
-				cpx #$fe
+fill_scr:		adc #$01				//fill screen counts up
+				sta rasterline
+				cmp #$fe
 				bne continue
 				lda #$01
 				sta fillmodeflag
 				jmp continue
 				
-drain_scr:		dex						//drain screen counts down
-				stx rasterline
-				cpx startline
+drain_scr:		sbc #$01						//drain screen counts down
+				sta rasterline
+				cmp startline
 				bne continue
 				lda #$00
 				sta fillmodeflag				
