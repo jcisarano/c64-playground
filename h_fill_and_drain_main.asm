@@ -6,9 +6,9 @@
 
 BasicUpstart2(main)
 
-			* = $4000 "Main Program"	
+			* = $4000 "Main Program"
 main:		sei
-			ldx #$000
+			ldx #$00
 
 			jsr init_scr
 			jsr init_irq
