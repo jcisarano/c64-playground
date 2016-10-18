@@ -13,7 +13,7 @@ init_irq:	ldy #$7f		//turns off CIA interrupts
 			sta $d012		//init the first interrupt line
 			
 			lda $d011   
-			and #$6f		//01101111 in binary, turns off raster line high bit and also screen (so raster lines are full screen)
-			sta $d011
+			and #$7f		//$6f is 01101111 in binary, turns off raster line high bit and also screen (so raster lines are full screen)
+			sta $d011		//to keep the screen, use 01111111 instead ($7f)
 			
 			rts
