@@ -23,17 +23,14 @@ loop:		lda colors,x	//load a color value from the data array
 			sta $d020		//store a color value from accumulator to the border color
 			//sta $d021
 			
-			//cpy #$ae
-			//bne next
-			//ldy #$7a
 			
-next:		cpx #$34		//check the counter to see if all values have been read yet
+next:		cpx #$67		//check the counter to see if all values have been read yet
 			beq init
 			
 			inx				//x is the counter (basically the index if you think of colors as an array)
 			iny				//y is the raster line to compare against
 			
-			cpy #$ae
+			cpy #$ae		//loop the line number back to the start if needed
 			bne loop
 			ldy #$7a
 			
@@ -58,4 +55,4 @@ colors:
          	.byte $03,$01,$03,$03,$03,$0e
          	.byte $03,$03,$0e,$03,$0e,$0e
          	.byte $0e,$06,$0e,$0e,$06,$0e
-         	.byte $06,$06,$06,$00      	
+         	.byte $06,$06,$06,$00

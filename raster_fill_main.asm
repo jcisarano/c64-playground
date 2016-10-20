@@ -42,18 +42,17 @@ colormode2:				lda #$00							//flip the flag to the other mode
 						lda #$08							//this is the fill color
 						sta $d020
 						
-						ldx counter							//skip a few frames to slow down the fill
-						inx
-						stx counter
-						cpx #$03							//how many frames to skip
-						bne continue
-						ldx #$00
-						stx counter
+						//ldx counter							//skip a few frames to slow down the fill
+						//inx
+						//stx counter
+						//cpx #$03							//how many frames to skip
+						//bne continue
+						//ldx #$00
+						//stx counter
 						
-						ldx rasterline						//simple counting routine, increase the raster line to break on
-						inx
-						stx rasterline
-
+						inc rasterline						//simple counting routine, increase the raster line to break on
+						
+						ldx rasterline
 						cpx #$fe							//compare against last line
 						bne continue		
 						ldx #$05							//reset

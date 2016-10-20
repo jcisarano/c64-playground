@@ -10,8 +10,8 @@
 BasicUpstart2(main)
 
                 * = $4000 "Main Program"
-main:           lda #$00                //high byte         
-                sta $00         
+main:           lda #$00         
+                sta $00         		//high byte
                 sta $96                 //low byte
                 
 countup:        clc
@@ -20,10 +20,11 @@ countup:        clc
                 bcc nocarry				//carry flag will be set when we roll over from 255 to 256
                 inc $00					//this increments the value stored in that memory location
                 
-nocarry:        cpx #$01                //compare high bit/low bit against exit conditions
-                bne write				//no match, so write the current value to the screen
-                cmp #$39
-                beq write1				//all conditions match, so go to the other loop to start counting down
+                						//compare high bit AND low bit against exit conditions separately
+nocarry:		cmp #$39				//I'm doing this one first because it will only match twice, meaning the next couple of lines will be hit less frequently than if I checked the high byte first
+				bne	write				//no match, so write the current value to the screen
+				cpx #$01
+				beq write1				//all conditions match, so go to the other loop to start counting down
                 
 write:	        lda $00                 //load to A and X
                 ldx $96
