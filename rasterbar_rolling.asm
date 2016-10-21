@@ -1,6 +1,6 @@
 //this is similar to the "rasterbar_alternate_method" except that I have changed the way the counters work
 //so they reset separately from each other. By doing that, I create a rolling color effect
-//so that the color bars appear to move.
+//so that the color bars appear to move. The only problem with it is the jitter in the last line.
 
 //Tweaking the max value for the X register will affect how quickly the colors appear to move, and in what direction.
 
