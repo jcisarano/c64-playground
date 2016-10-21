@@ -1,4 +1,7 @@
 //another style of raster line effect that I ran across on codebase64
+//This one is different in that it turns off interrupts completely and then just
+//waits until a particular line is being drawn to set the color.
+
 //I'm looking at changing the colors over time to try and create some different effects
 
 BasicUpstart2(main)
@@ -21,7 +24,7 @@ loop:		lda colors,x	//load a color value from the data array
 			bne *-3			//if not, jump backwards 3 bytes from the current position to do the cpy again
 			
 			sta $d020		//store a color value from accumulator to the border color
-			//sta $d021
+			//sta $d021		//if you don't turn off the screen, this will write your color bars there, too.
 			
 			
 next:		cpx #$67		//check the counter to see if all values have been read yet
@@ -36,6 +39,7 @@ next:		cpx #$67		//check the counter to see if all values have been read yet
 			
 			jmp loop
 			
+			//these values define the line colors, each value is a different line	
 colors:
          	.byte $06,$06,$06,$0e,$06,$0e
          	.byte $0e,$06,$0e,$0e,$0e,$03
@@ -45,7 +49,8 @@ colors:
          	.byte $03,$01,$03,$03,$03,$0e
          	.byte $03,$03,$0e,$03,$0e,$0e
          	.byte $0e,$06,$0e,$0e,$06,$0e
-         	.byte $06,$06,$06,$00
+         	.byte $06,$06,$06
+         	.byte $00						//this ends up being the "background" color above and below the lines
          	
          	.byte $06,$06,$06,$0e,$06,$0e
          	.byte $0e,$06,$0e,$0e,$0e,$03
