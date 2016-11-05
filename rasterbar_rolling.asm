@@ -21,7 +21,7 @@ BasicUpstart2(main)
 main:		sei
 
 			lda $d011   
-			and #$6f		//$6f is 01101111 in binary, turns off raster line high bit and also screen (so raster lines are full screen)
+			and #$6f		//$6f is 01101111 in binary, zeroes the raster line high bit and also turns off screen (so raster lines are full screen)
 			sta $d011		//Using AND with this mask makes sure other bits in this memory location remain unchanged
 
 			ldy #$7a		//first rasterline for the color bar
